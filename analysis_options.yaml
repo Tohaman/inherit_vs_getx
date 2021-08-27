@@ -1,0 +1,22 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude: [build/**]
+  language:
+    strict-raw-types: true
+  strong-mode:
+    implicit-casts: false
+
+linter:
+  rules:
+    - cancel_subscriptions
+    - always_declare_return_types
+    - close_sinks
+    - comment_references
+    - one_member_abstracts
+#    - prefer_double_quotes
+    - sort_child_properties_last
+    - prefer_const_constructors
+    - prefer_const_declarations
+#    - use_key_in_widget_constructors
+#    - avoid_print
