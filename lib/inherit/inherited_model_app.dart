@@ -60,7 +60,7 @@ class _DataOwnerStatefulState extends State<DataOwnerStateful> {
         ),
         Container(
             padding: const EdgeInsets.all(10),
-            child: const Text('DEMO InheritedModel - при изменении любого значения в инхерите, обновляются ТОЛЬКО виджеты подписанные на ЭТО изменение'),
+            child: const Text('DEMO InheritedModel - все то же, что и InheritedWidget, но есть возможность отделять подписчиков по аспектам'),
         )
       ],
     );
@@ -88,26 +88,17 @@ class DataConsumerStateless extends StatelessWidget {
     );
   }
 }
+
 class DataConsumerStateful extends StatefulWidget {
   const DataConsumerStateful({Key? key}) : super(key: key);
 
   @override
   _DataConsumerStatefulState createState() => _DataConsumerStatefulState();
 }
-
 class _DataConsumerStatefulState extends State<DataConsumerStateful> {
   @override
   Widget build(BuildContext context) {
     print("build DataConsumerStateful");
-    /// Получаем значение из инхерита, но не подписываемся на изменения
-    // final element = context.getElementForInheritedWidgetOfExactType<DataProviderInherited>();
-    // final dataProvider = element?.widget as DataProviderInherited;
-    // final value = dataProvider.value;
-    // /// А так подписываемся на изменения элемента
-    // if (element != null) {
-    //   context.dependOnInheritedElement(element);
-    // }
-
     /// Получаем значение из инхерита и подписываемся на изменения
     final value = context
         .dependOnInheritedWidgetOfExactType<DataProviderInherited>(aspect: 'two')
@@ -129,11 +120,6 @@ class DataProviderInherited extends InheritedModel<String> {
     required this.valueTwo,
     required Widget child,
   }) : super(key: key, child: child);
-
-  static DataProviderInherited? of(BuildContext context) {
-    final DataProviderInherited? result = context.dependOnInheritedWidgetOfExactType<DataProviderInherited>();
-    return result;
-  }
 
   @override
   bool updateShouldNotify(DataProviderInherited oldWidget) {
