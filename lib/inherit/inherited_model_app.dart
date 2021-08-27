@@ -75,7 +75,10 @@ class DataConsumerStateless extends StatelessWidget {
   Widget build(BuildContext context) {
     print("build DataConsumerStateless");
     /// Получаем значение из инхерита и подписываемся на изменения
-    final value = context.dependOnInheritedWidgetOfExactType<DataProviderInherited>()?.valueOne ?? 0;
+    final value = context
+        .dependOnInheritedWidgetOfExactType<DataProviderInherited>(aspect: 'one')
+        ?.valueOne
+        ?? 0;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -106,13 +109,17 @@ class _DataConsumerStatefulState extends State<DataConsumerStateful> {
     // }
 
     /// Получаем значение из инхерита и подписываемся на изменения
-    final value = DataProviderInherited.of(context)?.valueTwo ?? 0;
+    final value = context
+        .dependOnInheritedWidgetOfExactType<DataProviderInherited>(aspect: 'two')
+        ?.valueTwo
+        ?? 0;
     return Text('$value');
   }
 }
 
-
-class DataProviderInherited extends InheritedWidget {
+// https://youtu.be/n_HLJUBkc48?t=2472
+// Переделываем InheritedWidget в InheritedModel
+class DataProviderInherited extends InheritedModel<String> {
   final int valueOne;
   final int valueTwo;
 
@@ -131,5 +138,15 @@ class DataProviderInherited extends InheritedWidget {
   @override
   bool updateShouldNotify(DataProviderInherited oldWidget) {
     return valueOne != oldWidget.valueOne || valueTwo != oldWidget.valueTwo;
+  }
+
+  @override
+  //dependencies - это и есть aspectы, указанные при вызове dependOnInheritedWidgetOfExactType
+  bool updateShouldNotifyDependent(covariant DataProviderInherited oldWidget, Set<String> dependencies) {
+    final isValueOneUpdated =
+        valueOne != oldWidget.valueOne && dependencies.contains('one');
+    final isValueTwoUpdated =
+        valueTwo != oldWidget.valueTwo && dependencies.contains('two');
+    return isValueOneUpdated || isValueTwoUpdated;
   }
 }
