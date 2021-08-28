@@ -4,6 +4,7 @@ import 'package:inherit_vs_getx/getx/getx_app.dart';
 import 'package:inherit_vs_getx/inherit/inherited_model_app.dart';
 import 'package:inherit_vs_getx/inherit/inherited_notifier_app.dart';
 import 'package:inherit_vs_getx/inherit/inherited_widget_app.dart';
+import 'package:inherit_vs_getx/selection.dart';
 
 void main() {
   print("main");
@@ -20,8 +21,9 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/inherited_widget_app", page: () => const InheritedWidgetApp()),
         GetPage(name: "/inherited_model_app", page: () => const InheritedModelApp()),
         GetPage(name: "/inherited_notifier_app", page: () => const InheritedNotifierApp()),
+        GetPage(name: "/", page: () => const SelectionView()),
       ],
-      initialRoute: "/getx_app",
+      initialRoute: "/",
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
