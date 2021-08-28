@@ -16,16 +16,25 @@ class MyApp extends StatelessWidget {
     print("bulid MyApp");
     return GetMaterialApp(
       getPages: [
-        GetPage(name: "/getx_app", page: () => const GetxApp()),
+        GetPage(name: "/getx_app", page: () => const GetXApp(), binding: CalcBind()),
         GetPage(name: "/inherited_widget_app", page: () => const InheritedWidgetApp()),
         GetPage(name: "/inherited_model_app", page: () => const InheritedModelApp()),
         GetPage(name: "/inherited_notifier_app", page: () => const InheritedNotifierApp()),
       ],
-      initialRoute: "/inherited_notifier_app",
+      initialRoute: "/getx_app",
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
     );
   }
+}
+
+class CalcBind extends Bindings {
+  @override
+  void dependencies() {
+    print("Calc binding");
+    Get.lazyPut(() => SimpleCalcViewModel());
+  }
+
 }
