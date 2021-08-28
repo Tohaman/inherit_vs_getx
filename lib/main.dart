@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:inherit_vs_getx/getx/getx_app.dart';
 import 'package:inherit_vs_getx/inherit/inherited_model_app.dart';
+import 'package:inherit_vs_getx/inherit/inherited_notifier_app.dart';
 import 'package:inherit_vs_getx/inherit/inherited_widget_app.dart';
 
 void main() {
@@ -18,8 +19,9 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/getx_app", page: () => const GetxApp()),
         GetPage(name: "/inherited_widget_app", page: () => const InheritedWidgetApp()),
         GetPage(name: "/inherited_model_app", page: () => const InheritedModelApp()),
+        GetPage(name: "/inherited_notifier_app", page: () => const InheritedNotifierApp()),
       ],
-      initialRoute: "/inherited_model_app",
+      initialRoute: "/inherited_notifier_app",
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,

@@ -60,7 +60,9 @@ class _DataOwnerStatefulState extends State<DataOwnerStateful> {
         ),
         Container(
             padding: const EdgeInsets.all(10),
-            child: const Text('DEMO InheritedModel - все то же, что и InheritedWidget, но есть возможность отделять подписчиков по аспектам'),
+            child: const Text('DEMO InheritedModel - все то же, что и InheritedWidget, '
+                'но есть возможность отделять подписчиков по аспектам. Но как и InheritedWidget '
+                'позволяет передавать значения только вниз по дереву'),
         )
       ],
     );
